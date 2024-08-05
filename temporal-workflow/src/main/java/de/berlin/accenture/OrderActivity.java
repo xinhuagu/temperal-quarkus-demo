@@ -13,6 +13,6 @@ public interface OrderActivity {
   void updateOrder(OrderDto order);
 
   @ActivityMethod
-  void closeOrder(OrderDto order);
+  void cancelOrder(OrderDto order);
 
 }

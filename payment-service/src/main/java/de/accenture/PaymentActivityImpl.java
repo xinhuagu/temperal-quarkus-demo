@@ -24,4 +24,9 @@ public class PaymentActivityImpl implements PaymentAcitivity {
   public void commitPayment(PaymentDto payment) {
     log.info("Payment for order {} is committed", payment.getOrderId());
   }
+
+  @Override
+  public void rollbackPayment(PaymentDto payment) {
+    log.info("Payment for order {} is rollback", payment.getOrderId());
+  }
 }

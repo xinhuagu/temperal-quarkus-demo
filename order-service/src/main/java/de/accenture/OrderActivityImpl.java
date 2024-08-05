@@ -21,7 +21,7 @@ public class OrderActivityImpl implements OrderActivity
   }
 
   @Override
-  public void closeOrder(OrderDto orderDto) {
-    log.info("Order {} is closed", orderDto.getId());
+  public void cancelOrder(OrderDto orderDto) {
+    log.info("Order {} is canceled", orderDto.getId());
   }
 }

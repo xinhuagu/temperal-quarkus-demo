@@ -1,8 +1,11 @@
 package de.berlin.accenture;
 
+import de.berlin.accenture.OrderDto.Status;
 import io.temporal.activity.Activity;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
+import io.temporal.failure.ActivityFailure;
+import io.temporal.workflow.Saga;
 import io.temporal.workflow.Workflow;
 import java.time.Duration;
 
@@ -60,15 +63,26 @@ public class OrderWorkflowImpl implements OrderWorkflow {
 
     logger.info("Workflow {} is starting", workflowId);
 
-    orderActivity.saveOrder(order);
+    Saga saga = new Saga(new Saga.Options.Builder().setParallelCompensation(false)
+                                                   .build());
 
-    var payment = paymentAcitivity.verifyPaymentMethod(order);
+    try {
+      saga.addCompensation(orderActivity::cancelOrder, order);
+      saga.addCompensation(order::setStatus, Status.CANCELED);
+      orderActivity.saveOrder(order);
 
-    paymentAcitivity.commitPayment(payment);
+      var payment = paymentAcitivity.verifyPaymentMethod(order);
 
-    order.setPaid(true);
+      saga.addCompensation(paymentAcitivity::rollbackPayment,payment);
+      paymentAcitivity.commitPayment(payment);
 
-    orderActivity.updateOrder(order);
+      order.setStatus(Status.PAID);
+      orderActivity.updateOrder(order);
+
+    } catch (ActivityFailure activityFailure) {
+      saga.compensate();
+      throw activityFailure;
+    }
 
   }
 }

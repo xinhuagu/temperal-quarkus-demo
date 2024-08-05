@@ -12,4 +12,7 @@ public interface PaymentAcitivity {
   @ActivityMethod
   void commitPayment(PaymentDto payment);
 
+  @ActivityMethod
+  void rollbackPayment(PaymentDto payment);
+
 }

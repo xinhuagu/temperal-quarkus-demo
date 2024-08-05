@@ -4,9 +4,17 @@ import lombok.Data;
 
 @Data
 public class OrderDto {
+
+  public enum Status {
+    CREATED,
+    CANCELED,
+    PAID,
+    SHIPPED;
+  }
+
   private String id;
   private String product;
   private Integer amount;
-  private boolean paid;
+  private Status status;
 
 }
