@@ -1,0 +1,8 @@
+de/berlin/accenture/OrderActivity.class
+de/berlin/accenture/OrderWorkflow.class
+de/berlin/accenture/PaymentDto.class
+de/berlin/accenture/PaymentAcitivity.class
+de/berlin/accenture/OrderWorkflowImpl.class
+de/berlin/accenture/PaymentDto$PaymentDtoBuilder.class
+de/berlin/accenture/OrderDto.class
+de/berlin/accenture/ShipmentActivity.class
