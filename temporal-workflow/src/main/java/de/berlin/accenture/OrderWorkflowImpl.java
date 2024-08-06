@@ -79,6 +79,8 @@ public class OrderWorkflowImpl implements OrderWorkflow {
       order.setStatus(Status.PAID);
       orderActivity.updateOrder(order);
 
+      logger.info("Workflow {} is finished", workflowId);
+
     } catch (ActivityFailure activityFailure) {
       saga.compensate();
       throw activityFailure;

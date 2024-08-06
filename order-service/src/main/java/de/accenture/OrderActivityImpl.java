@@ -24,4 +24,5 @@ public class OrderActivityImpl implements OrderActivity
   public void cancelOrder(OrderDto orderDto) {
     log.info("Order {} is canceled", orderDto.getId());
   }
+
 }
