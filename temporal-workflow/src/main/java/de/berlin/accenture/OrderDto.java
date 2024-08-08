@@ -6,10 +6,10 @@ import lombok.Data;
 public class OrderDto {
 
   public enum Status {
+    NEW,
     CREATED,
     CANCELED,
-    PAID,
-    SHIPPED;
+    SHIPPING;
   }
 
   private String id;

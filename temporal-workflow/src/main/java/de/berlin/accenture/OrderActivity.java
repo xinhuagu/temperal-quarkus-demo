@@ -7,12 +7,12 @@ import io.temporal.activity.ActivityMethod;
 public interface OrderActivity {
 
   @ActivityMethod
-  void saveOrder(OrderDto order);
+  PaymentDto createOrder(OrderDto order);
 
   @ActivityMethod
-  void updateOrder(OrderDto order);
+  ShipmentDto updateOrderAndShip(OrderDto order);
 
   @ActivityMethod
-  void cancelOrder(OrderDto order);
+  OrderDto cancelOrder(OrderDto order);
 
 }

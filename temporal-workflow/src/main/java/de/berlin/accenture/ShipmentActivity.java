@@ -7,6 +7,6 @@ import io.temporal.activity.ActivityMethod;
 public interface ShipmentActivity {
 
   @ActivityMethod
-  void startShipment(OrderDto order);
+  void startShipment(ShipmentDto shipment);
 
 }

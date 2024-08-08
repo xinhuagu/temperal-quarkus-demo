@@ -7,9 +7,6 @@ import io.temporal.activity.ActivityMethod;
 public interface PaymentAcitivity {
 
   @ActivityMethod
-  PaymentDto verifyPaymentMethod(OrderDto order);
-
-  @ActivityMethod
   void commitPayment(PaymentDto payment);
 
   @ActivityMethod
