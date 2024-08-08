@@ -1,5 +1,6 @@
 package de.berlin.accenture;
 
+import de.berlin.accenture.model.OrderDto;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 

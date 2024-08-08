@@ -1,10 +1,9 @@
 package de.accenture;
 
-import de.berlin.accenture.OrderDto;
-import de.berlin.accenture.PaymentAcitivity;
-import de.berlin.accenture.PaymentDto;
+
+import de.berlin.accenture.activity.PaymentAcitivity;
+import de.berlin.accenture.model.PaymentDto;
 import jakarta.enterprise.context.ApplicationScoped;
-import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 
 

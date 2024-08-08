@@ -1,5 +1,9 @@
 package de.berlin.accenture;
 
+import de.berlin.accenture.activity.OrderActivity;
+import de.berlin.accenture.activity.PaymentAcitivity;
+import de.berlin.accenture.activity.ShipmentActivity;
+import de.berlin.accenture.model.OrderDto;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
 import io.temporal.failure.ActivityFailure;

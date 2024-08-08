@@ -1,4 +1,4 @@
-package de.berlin.accenture;
+package de.berlin.accenture.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShipmentDto {
+public class PaymentDto {
 
   private String orderId;
-  private String shipmentId;
+  private String paymentId;
 
 }

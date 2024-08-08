@@ -1,7 +1,8 @@
 package de.accenture;
 
-import de.berlin.accenture.ShipmentActivity;
-import de.berlin.accenture.ShipmentDto;
+
+import de.berlin.accenture.activity.ShipmentActivity;
+import de.berlin.accenture.model.ShipmentDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 

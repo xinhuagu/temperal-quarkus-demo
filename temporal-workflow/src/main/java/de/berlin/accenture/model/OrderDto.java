@@ -1,4 +1,4 @@
-package de.berlin.accenture;
+package de.berlin.accenture.model;
 
 import lombok.Data;
 

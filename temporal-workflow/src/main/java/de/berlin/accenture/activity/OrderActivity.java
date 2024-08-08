@@ -1,5 +1,8 @@
-package de.berlin.accenture;
+package de.berlin.accenture.activity;
 
+import de.berlin.accenture.model.OrderDto;
+import de.berlin.accenture.model.PaymentDto;
+import de.berlin.accenture.model.ShipmentDto;
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
 
