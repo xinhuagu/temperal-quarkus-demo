@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShipmentDto {
+public class OrderingResultDto {
+  public enum Status {
+    SUCCESS,
+    FAILED;
+  }
 
   private String orderId;
-  private String shipmentId;
-
+  private Status status;
 }

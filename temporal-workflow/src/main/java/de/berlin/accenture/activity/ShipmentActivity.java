@@ -1,6 +1,6 @@
 package de.berlin.accenture.activity;
 
-import de.berlin.accenture.model.ShipmentDto;
+import de.berlin.accenture.model.OrderDto;
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
 
@@ -8,6 +8,6 @@ import io.temporal.activity.ActivityMethod;
 public interface ShipmentActivity {
 
   @ActivityMethod
-  void startShipment(ShipmentDto shipment);
+  OrderDto startShipment(OrderDto orderDto);
 
 }

@@ -1,7 +1,7 @@
 package de.accenture;
 
-import de.berlin.accenture.OrderDto;
 import de.berlin.accenture.OrderWorkflow;
+import de.berlin.accenture.model.OrderDto;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import jakarta.inject.Inject;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Path("/order")
-public class GreetingResource {
+public class OrderingResource {
 
   @Inject
   WorkflowClient workflowClient;
@@ -28,7 +28,8 @@ public class GreetingResource {
     OrderWorkflow orderWorkflow = workflowClient.newWorkflowStub(OrderWorkflow.class, options);
     WorkflowClient.start(orderWorkflow::startOrdering, order);
 
-    return Response.ok("order process starts")
+    var result = orderWorkflow.ordering();
+    return Response.ok("order process starts").entity(result)
                                                  .build();
   }
 }

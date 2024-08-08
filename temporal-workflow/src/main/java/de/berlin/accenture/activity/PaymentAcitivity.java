@@ -1,6 +1,6 @@
 package de.berlin.accenture.activity;
 
-import de.berlin.accenture.model.PaymentDto;
+import de.berlin.accenture.model.OrderDto;
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
 
@@ -8,9 +8,9 @@ import io.temporal.activity.ActivityMethod;
 public interface PaymentAcitivity {
 
   @ActivityMethod
-  void commitPayment(PaymentDto payment);
+  OrderDto commitPayment(OrderDto orderDto);
 
   @ActivityMethod
-  void rollbackPayment(PaymentDto payment);
+  OrderDto rollbackPayment(OrderDto payment);
 
 }

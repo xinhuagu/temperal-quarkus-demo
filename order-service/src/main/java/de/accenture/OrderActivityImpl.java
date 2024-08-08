@@ -4,8 +4,6 @@ package de.accenture;
 import de.berlin.accenture.activity.OrderActivity;
 import de.berlin.accenture.model.OrderDto;
 import de.berlin.accenture.model.OrderDto.Status;
-import de.berlin.accenture.model.PaymentDto;
-import de.berlin.accenture.model.ShipmentDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -16,28 +14,23 @@ public class OrderActivityImpl implements OrderActivity
 {
 
   @Override
-  public PaymentDto createOrder(OrderDto orderDto) {
+  public OrderDto createOrder(OrderDto orderDto) {
     orderDto.setStatus(Status.CREATED);
-    log.info("Order Id: {} , Status ->  {}", orderDto.getId(), orderDto.getStatus());
-
-    var payment = PaymentDto.builder().orderId(orderDto.getId()).paymentId(UUID.randomUUID().toString()).build();
-    return payment;
+    log.info("Step 1 => Order Id: {} , Status: {}", orderDto.getId(), orderDto.getStatus());
+    return orderDto;
   }
 
   @Override
-  public ShipmentDto updateOrderAndShip(OrderDto orderDto) {
+  public OrderDto startShipping(OrderDto orderDto) {
     orderDto.setStatus(Status.SHIPPING);
-    log.info("Order Id: {} , Status -> {}", orderDto.getId(), orderDto.getStatus());
-
-    var shipment = ShipmentDto.builder().orderId(orderDto.getId()).shipmentId(UUID.randomUUID().toString()).build();
-    return shipment;
+    log.info("Step 3 => Order Id: {} , Status: {}", orderDto.getId(), orderDto.getStatus());
+    return orderDto;
   }
 
   @Override
   public OrderDto cancelOrder(OrderDto orderDto) {
     orderDto.setStatus(Status.CANCELED);
-    log.info("Order Id: {} , Status -> {}", orderDto.getId(), orderDto.getStatus());
-
+    log.info("Compensation [CANCELLATION] => Order Id: {} , Status -> {}", orderDto.getId(), orderDto.getStatus());
     return orderDto;
   }
 

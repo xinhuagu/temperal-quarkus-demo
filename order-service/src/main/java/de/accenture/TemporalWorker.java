@@ -1,8 +1,8 @@
 package de.accenture;
 
-import de.berlin.accenture.OrderActivity;
 import de.berlin.accenture.OrderWorkflow;
 import de.berlin.accenture.OrderWorkflowImpl;
+import de.berlin.accenture.activity.OrderActivity;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import io.temporal.client.WorkflowClient;
