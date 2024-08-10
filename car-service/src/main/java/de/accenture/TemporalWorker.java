@@ -1,8 +1,8 @@
 package de.accenture;
 
-import de.berlin.accenture.OrderWorkflow;
-import de.berlin.accenture.OrderWorkflowImpl;
-import de.berlin.accenture.activity.OrderActivity;
+import de.berlin.accenture.BookingWorkflow;
+import de.berlin.accenture.BookingWorkflowImpl;
+import de.berlin.accenture.activity.CarBookingActivity;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import io.temporal.client.WorkflowClient;
@@ -22,16 +22,16 @@ public class TemporalWorker {
   WorkflowClient workflowClient;
 
   @Inject
-  OrderActivity orderActivity;
+  CarBookingActivity carActivity;
 
   void onStart(@Observes StartupEvent ev) {
 
     factory= WorkerFactory.newInstance(workflowClient);
-    var worker = factory.newWorker(OrderWorkflow.ORDER_TASK_QUEUE);
+    var worker = factory.newWorker(BookingWorkflow.CAR_SERVICE_TASK_QUEUE);
 
-    worker.registerWorkflowImplementationTypes(OrderWorkflowImpl.class);
+    worker.registerWorkflowImplementationTypes(BookingWorkflowImpl.class);
 
-    worker.registerActivitiesImplementations(orderActivity);
+    worker.registerActivitiesImplementations(carActivity);
     factory.start();
     log.info("Temporal worker started.");
   }

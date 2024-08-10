@@ -9,12 +9,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderingResultDto {
+public class BookingDTO {
+
   public enum Status {
-    SUCCESS,
-    FAILED;
+    NEW,
+    CAR_BOOKED,
+    CAR_CANCELED,
+    HOTEL_BOOKED,
+    HOTEL_CANCELED,
+    FLIGHT_BOOKED,
+    FAILED,
+    SUCCESS;
   }
 
-  private String orderId;
+  private String id;
   private Status status;
+
 }

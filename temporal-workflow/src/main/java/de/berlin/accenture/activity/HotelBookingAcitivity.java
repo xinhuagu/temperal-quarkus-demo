@@ -1,16 +1,16 @@
 package de.berlin.accenture.activity;
 
-import de.berlin.accenture.model.OrderDto;
+import de.berlin.accenture.model.BookingDTO;
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
 
 @ActivityInterface
-public interface PaymentAcitivity {
+public interface HotelBookingAcitivity {
 
   @ActivityMethod
-  OrderDto commitPayment(OrderDto orderDto);
+  BookingDTO bookHotel(BookingDTO orderDto);
 
   @ActivityMethod
-  OrderDto rollbackPayment(OrderDto payment);
+  BookingDTO cancelHotel(BookingDTO payment);
 
 }

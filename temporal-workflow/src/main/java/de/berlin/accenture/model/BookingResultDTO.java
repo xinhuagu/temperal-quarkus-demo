@@ -9,23 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
-
+public class BookingResultDTO {
   public enum Status {
-    NEW,
-    CREATED,
-    PAID,
-    PAYMENT_ROLLBACK,
-    CANCELED,
-    SHIPPING,
-    SHIPPING_FAILED,
-    SHIPPED,
-    FINISHED;
+    SUCCESS,
+    FAILED;
   }
 
-  private String id;
-  private String product;
-  private Integer amount;
+  private String orderId;
   private Status status;
-
 }
