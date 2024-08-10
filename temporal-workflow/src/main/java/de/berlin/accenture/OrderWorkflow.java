@@ -16,7 +16,7 @@ public interface OrderWorkflow {
   void startOrdering(OrderDto order);
 
 
-  @UpdateMethod
-  OrderingResultDto ordering();
+//  @UpdateMethod
+//  OrderingResultDto ordering();
 
 }

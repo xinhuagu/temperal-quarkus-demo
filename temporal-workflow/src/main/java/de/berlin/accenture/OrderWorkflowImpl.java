@@ -21,7 +21,7 @@ public class OrderWorkflowImpl implements OrderWorkflow {
 
   private final RetryOptions retryOptions = RetryOptions.newBuilder()
                                                         .setInitialInterval(Duration.ofSeconds(2))
-                                                        .setMaximumAttempts(3)
+                                                        .setMaximumAttempts(1)
                                                         .build();
 
   private final ActivityOptions orderActivityOptions = ActivityOptions.newBuilder()
@@ -60,7 +60,7 @@ public class OrderWorkflowImpl implements OrderWorkflow {
   private final ShipmentActivity shipmentActivity = Workflow.newActivityStub(ShipmentActivity.class,
       shipmentActivityOptions);
 
-  private final CompletablePromise<OrderingResultDto> ordering = Workflow.newPromise();
+//  private final CompletablePromise<OrderingResultDto> ordering = Workflow.newPromise();
 
   Logger logger = Workflow.getLogger(this.getClass());
 
@@ -86,10 +86,10 @@ public class OrderWorkflowImpl implements OrderWorkflow {
 
       order = shipmentActivity.startShipment(order);
 
-      ordering.complete(OrderingResultDto.builder()
-                  .orderId(order.getId())
-                  .status(Status.SUCCESS)
-                   .build());
+//      ordering.complete(OrderingResultDto.builder()
+//                  .orderId(order.getId())
+//                  .status(Status.SUCCESS)
+//                   .build());
 
       logger.info("Workflow {} is finished", workflowId);
 
@@ -99,17 +99,17 @@ public class OrderWorkflowImpl implements OrderWorkflow {
                                             .orderId(order.getId())
                                             .status(Status.FAILED)
                                             .build();
-      ordering.complete(orderingResult);
+//      ordering.complete(orderingResult);
     }
 
   }
 
-  @Override
-  public OrderingResultDto ordering() {
-    var or = ordering.get();
-    logger.info("Result => Order id: {}, Status: {}", or.getOrderId(), or.getStatus());
-    return or;
-  }
+//  @Override
+//  public OrderingResultDto ordering() {
+//    var or = ordering.get();
+//    logger.info("Result => Order id: {}, Status: {}", or.getOrderId(), or.getStatus());
+//    return or;
+//  }
 
 
 }

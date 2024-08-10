@@ -28,8 +28,8 @@ public class OrderingResource {
     OrderWorkflow orderWorkflow = workflowClient.newWorkflowStub(OrderWorkflow.class, options);
     WorkflowClient.start(orderWorkflow::startOrdering, order);
 
-    var result = orderWorkflow.ordering();
-    return Response.ok("order process starts").entity(result)
+//    var result = orderWorkflow.ordering();
+    return Response.ok("order process starts").entity(order)
                                                  .build();
   }
 }
