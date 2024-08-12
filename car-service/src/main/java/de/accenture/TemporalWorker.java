@@ -26,7 +26,7 @@ public class TemporalWorker {
 
   void onStart(@Observes StartupEvent ev) {
 
-    factory= WorkerFactory.newInstance(workflowClient);
+    factory = WorkerFactory.newInstance(workflowClient);
     var worker = factory.newWorker(BookingWorkflow.CAR_SERVICE_TASK_QUEUE);
 
     worker.registerWorkflowImplementationTypes(BookingWorkflowImpl.class);
@@ -37,7 +37,7 @@ public class TemporalWorker {
   }
 
   void onStop(@Observes ShutdownEvent ev) {
-    if ( factory != null) {
+    if (factory != null) {
       factory.shutdown();
     }
     log.info("Temporal worker stopped.");

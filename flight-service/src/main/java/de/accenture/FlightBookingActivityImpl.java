@@ -1,6 +1,5 @@
 package de.accenture;
 
-
 import de.berlin.accenture.activity.FlightBookingActivity;
 import de.berlin.accenture.model.BookingDTO;
 import de.berlin.accenture.model.BookingDTO.Status;

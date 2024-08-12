@@ -1,7 +1,5 @@
 package de.accenture;
 
-
-
 import de.berlin.accenture.activity.CarBookingActivity;
 import de.berlin.accenture.model.BookingDTO;
 import de.berlin.accenture.model.BookingDTO.Status;
@@ -10,8 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ApplicationScoped
-public class CarBookingActivityImpl implements CarBookingActivity
-{
+public class CarBookingActivityImpl implements CarBookingActivity {
   @Override
   public BookingDTO bookCar(BookingDTO bookingDTO) {
     bookingDTO.setStatus(Status.CAR_BOOKED);

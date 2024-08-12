@@ -8,8 +8,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
+import de.berlin.accenture.model.BookingResultDTO;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 @Path("/booking")
@@ -19,17 +19,19 @@ public class BookingResource {
   WorkflowClient workflowClient;
 
   @POST
-  public Response booking(BookingDTO booking) {
+  public BookingResultDTO booking(BookingDTO booking) {
     log.info("incoming booking: " + booking.toString());
+
     WorkflowOptions options = WorkflowOptions.newBuilder()
-                                             .setTaskQueue(BookingWorkflow.CAR_SERVICE_TASK_QUEUE)
-                                             .setWorkflowId("Booking-" + booking.getId())
-                                             .build();
+        .setTaskQueue(BookingWorkflow.CAR_SERVICE_TASK_QUEUE)
+        .setWorkflowId("Booking-" + booking.getId())
+        .build();
     BookingWorkflow bookingWorkflow = workflowClient.newWorkflowStub(BookingWorkflow.class, options);
     WorkflowClient.start(bookingWorkflow::startBooking, booking);
 
-//    var result = bookingWorkflow.ordering();
-    return Response.ok("booking process starts").entity(booking)
-                                                 .build();
+    BookingResultDTO result = bookingWorkflow.booking();
+    log.info("Booking Id {} , Status: {}", result.getBookingId(), result.getStatus());
+
+    return result;
   }
 }

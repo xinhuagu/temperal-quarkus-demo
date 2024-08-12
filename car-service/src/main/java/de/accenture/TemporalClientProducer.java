@@ -13,8 +13,7 @@ public class TemporalClientProducer {
   @ApplicationScoped
   public WorkflowClient workflowClient() {
     WorkflowServiceStubs service = WorkflowServiceStubs.newServiceStubs(
-        WorkflowServiceStubsOptions.newBuilder().setTarget("localhost:7233").build()
-    );
+        WorkflowServiceStubsOptions.newBuilder().setTarget("localhost:7233").build());
     return WorkflowClient.newInstance(service);
   }
 }

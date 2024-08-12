@@ -15,6 +15,6 @@ public class BookingResultDTO {
     FAILED;
   }
 
-  private String orderId;
+  private String bookingId;
   private Status status;
 }
