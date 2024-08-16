@@ -19,7 +19,7 @@ public class BookingResource {
   WorkflowClient workflowClient;
 
   @POST
-  public BookingResultDTO booking(BookingDTO booking) {
+  public String booking(BookingDTO booking) {
     log.info("incoming booking: " + booking.toString());
 
     WorkflowOptions options = WorkflowOptions.newBuilder()
@@ -27,11 +27,10 @@ public class BookingResource {
         .setWorkflowId("Booking-" + booking.getId())
         .build();
     BookingWorkflow bookingWorkflow = workflowClient.newWorkflowStub(BookingWorkflow.class, options);
-    WorkflowClient.start(bookingWorkflow::startBooking, booking);
+    var excution = WorkflowClient.start(bookingWorkflow::startBooking, booking);
+    var workflowId = excution.getWorkflowId();
+    log.info("Workflow {} is finished", workflowId);
 
-    BookingResultDTO result = bookingWorkflow.booking();
-    log.info("Booking Id {} , Status: {}", result.getBookingId(), result.getStatus());
-
-    return result;
+    return "Workflow " + workflowId + " is started";
   }
 }

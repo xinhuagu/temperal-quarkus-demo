@@ -58,12 +58,10 @@ public class BookingWorkflowImpl implements BookingWorkflow {
   private final FlightBookingActivity flightBookingActivity = Workflow.newActivityStub(
       FlightBookingActivity.class, flightBookingActivityOptions);
 
-  private final CompletablePromise<BookingResultDTO> bookingsync = Workflow.newPromise();
-
   Logger logger = Workflow.getLogger(this.getClass());
 
   @Override
-  public void startBooking(BookingDTO booking) {
+  public BookingResultDTO startBooking(BookingDTO booking) {
 
     var workflowId = Workflow.getInfo()
         .getWorkflowId();
@@ -83,23 +81,18 @@ public class BookingWorkflowImpl implements BookingWorkflow {
 
       booking = flightBookingActivity.bookFlight(booking);
 
-      bookingsync.complete(BookingResultDTO.builder().bookingId(booking.getId()).status(Status.SUCCESS).build());
-
       logger.info("Workflow {} is finished", workflowId);
+
+      return BookingResultDTO.builder().status(Status.SUCCESS).bookingId(booking.getId()).build();
 
     } catch (ActivityFailure activityFailure) {
       Workflow.newDetachedCancellationScope(() -> saga.compensate()).run();
       var result = BookingResultDTO.builder()
           .bookingId(booking.getId())
           .status(Status.FAILED).build();
-      bookingsync.complete(result);
+      return result;
     }
 
-  }
-
-  @Override
-  public BookingResultDTO booking() {
-    return bookingsync.get();
   }
 
 }

@@ -13,9 +13,6 @@ public interface BookingWorkflow {
   final static String FLIGHT_SERVICE_TASK_QUEUE = "flightServiceTaskQueue";
 
   @WorkflowMethod(name = "Booking")
-  void startBooking(BookingDTO order);
-
-  @UpdateMethod
-  BookingResultDTO booking();
+  BookingResultDTO startBooking(BookingDTO order);
 
 }
