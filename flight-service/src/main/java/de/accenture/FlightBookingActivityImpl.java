@@ -12,9 +12,8 @@ public class FlightBookingActivityImpl implements FlightBookingActivity {
 
   @Override
   public BookingDTO bookFlight(BookingDTO bookingDTO) {
-    bookingDTO.setStatus(Status.FLIGHT_BOOKED);
-    log.info("Step 3 => Order Id {}, Status: {}", bookingDTO.getId(), bookingDTO.getStatus());
-    return bookingDTO;
+    
+    throw new RuntimeException();
   }
 
 }
