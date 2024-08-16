@@ -29,7 +29,6 @@ public class BookingResource {
     BookingWorkflow bookingWorkflow = workflowClient.newWorkflowStub(BookingWorkflow.class, options);
     var excution = WorkflowClient.start(bookingWorkflow::startBooking, booking);
     var workflowId = excution.getWorkflowId();
-    log.info("Workflow {} is finished", workflowId);
 
     return "Workflow " + workflowId + " is started";
   }
