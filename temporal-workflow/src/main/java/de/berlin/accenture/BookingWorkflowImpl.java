@@ -12,7 +12,6 @@ import io.temporal.failure.ActivityFailure;
 import io.temporal.workflow.Saga;
 import io.temporal.workflow.Workflow;
 import java.time.Duration;
-import io.temporal.workflow.CompletablePromise;
 import org.slf4j.Logger;
 
 public class BookingWorkflowImpl implements BookingWorkflow {
