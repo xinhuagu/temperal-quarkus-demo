@@ -2,6 +2,7 @@ package de.accenture;
 
 import de.berlin.accenture.BookingWorkflow;
 import de.berlin.accenture.model.BookingDTO;
+import de.berlin.accenture.model.BookingResultDTO;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import jakarta.inject.Inject;
@@ -17,7 +18,7 @@ public class BookingResource {
   WorkflowClient workflowClient;
 
   @POST
-  public String booking(BookingDTO booking) {
+  public BookingResultDTO booking(BookingDTO booking) {
     log.info("incoming booking: " + booking.toString());
 
     WorkflowOptions options = WorkflowOptions.newBuilder()
@@ -27,7 +28,6 @@ public class BookingResource {
     BookingWorkflow bookingWorkflow = workflowClient.newWorkflowStub(BookingWorkflow.class, options);
     var excution = WorkflowClient.start(bookingWorkflow::startBooking, booking);
     var workflowId = excution.getWorkflowId();
-
-    return "Workflow " + workflowId + " is started";
+    return bookingWorkflow.booking();
   }
 }

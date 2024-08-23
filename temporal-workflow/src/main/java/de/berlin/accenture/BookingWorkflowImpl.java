@@ -9,6 +9,7 @@ import de.berlin.accenture.model.BookingResultDTO.Status;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
 import io.temporal.failure.ActivityFailure;
+import io.temporal.workflow.CompletablePromise;
 import io.temporal.workflow.Saga;
 import io.temporal.workflow.Workflow;
 import java.time.Duration;
@@ -60,6 +61,8 @@ public class BookingWorkflowImpl implements BookingWorkflow {
   private final FlightBookingActivity flightBookingActivity = Workflow.newActivityStub(
       FlightBookingActivity.class, flightBookingActivityOptions);
 
+  private final CompletablePromise<BookingResultDTO> bookingsync = Workflow.newPromise();
+
   Logger logger = Workflow.getLogger(this.getClass());
 
   @Override
@@ -83,6 +86,8 @@ public class BookingWorkflowImpl implements BookingWorkflow {
 
       booking = flightBookingActivity.bookFlight(booking);
 
+      bookingsync.complete(BookingResultDTO.builder().bookingId(booking.getId()).status(Status.SUCCESS).build());
+
       logger.info("Workflow {} is finished", workflowId);
 
       return BookingResultDTO.builder().status(Status.SUCCESS).bookingId(booking.getId()).build();
@@ -95,6 +100,11 @@ public class BookingWorkflowImpl implements BookingWorkflow {
       return result;
     }
 
+  }
+
+  @Override
+  public BookingResultDTO booking() {
+    return bookingsync.get();
   }
 
 }

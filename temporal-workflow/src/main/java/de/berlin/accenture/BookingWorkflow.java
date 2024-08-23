@@ -2,6 +2,7 @@ package de.berlin.accenture;
 
 import de.berlin.accenture.model.BookingDTO;
 import de.berlin.accenture.model.BookingResultDTO;
+import io.temporal.workflow.UpdateMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 
@@ -13,5 +14,8 @@ public interface BookingWorkflow {
 
   @WorkflowMethod(name = "Booking")
   BookingResultDTO startBooking(BookingDTO order);
+
+  @UpdateMethod
+  BookingResultDTO booking();
 
 }
