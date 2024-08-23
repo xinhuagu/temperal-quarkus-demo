@@ -23,7 +23,8 @@ public class BookingWorkflowImpl implements BookingWorkflow {
 
   private final ActivityOptions carBookingActivityOptions = ActivityOptions.newBuilder()
       .setStartToCloseTimeout(
-          Duration.ofSeconds(120))
+          Duration.ofSeconds(10))
+      .setScheduleToStartTimeout(Duration.ofSeconds(10))
       .setTaskQueue(
           CAR_SERVICE_TASK_QUEUE)
       .setRetryOptions(retryOptions)
@@ -31,7 +32,8 @@ public class BookingWorkflowImpl implements BookingWorkflow {
 
   private final ActivityOptions hotelBookingActivityOptions = ActivityOptions.newBuilder()
       .setStartToCloseTimeout(
-          Duration.ofSeconds(120))
+          Duration.ofSeconds(10))
+      .setScheduleToStartTimeout(Duration.ofSeconds(10))
       .setTaskQueue(
           HOTEL_SERVICE_TASK_QUEUE)
       .setRetryOptions(
@@ -41,7 +43,8 @@ public class BookingWorkflowImpl implements BookingWorkflow {
   private final ActivityOptions flightBookingActivityOptions = ActivityOptions.newBuilder()
       .setStartToCloseTimeout(
           Duration.ofSeconds(
-              120))
+              10))
+      .setScheduleToStartTimeout(Duration.ofSeconds(10))
       .setTaskQueue(
           FLIGHT_SERVICE_TASK_QUEUE)
       .setRetryOptions(
