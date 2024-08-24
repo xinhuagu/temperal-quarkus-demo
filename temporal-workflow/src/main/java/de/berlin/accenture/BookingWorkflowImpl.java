@@ -68,7 +68,6 @@ public class BookingWorkflowImpl implements BookingWorkflow {
     var workflowId = Workflow.getInfo()
         .getWorkflowId();
 
-    logger.info("Workflow {} is starting", workflowId);
 
     Saga saga = new Saga(new Saga.Options.Builder().setParallelCompensation(false)
         .build());
@@ -83,7 +82,6 @@ public class BookingWorkflowImpl implements BookingWorkflow {
 
       booking = flightBookingActivity.bookFlight(booking);
 
-      logger.info("Workflow {} is finished", workflowId);
 
       return BookingResultDTO.builder().status(Status.SUCCESS).bookingId(booking.getId()).build();
 
